@@ -1,0 +1,35 @@
+<div class="row" style="min-height: 90vh;">
+    <div class="col-md-6 col-12 d-flex justify-content-end align-items-center">
+        <!-- image -->
+        <img style="width: 500px;" src="https://www.kitlabs.us/wp-content/uploads/2020/09/login-1-1024x842.png" alt="">
+    </div>
+    <div class="col-md-6 col-12 rounded bg-light d-flex justify-content-start align-items-center ps-4">
+        <!-- form -->
+        <form (ngSubmit)="handleLogin()" #loginForm="ngForm" style="width: 70%;" class="rounded p-5">
+            <h3 class="text-center mb-3 fw-bold text-info">LOGIN</h3>
+            <div class="mb-3 p-1">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input name="email" [(ngModel)]="email" type="email" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" email required #useremailinput="ngModel">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+            <div class="mb-3" *ngIf="useremailinput.invalid && useremailinput.touched">
+                <!-- invalid email -->
+                <p class="text-danger m-2">Invalid Email Address !</p>
+            </div>
+            <div class="mb-3 p-1">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input name="passwod" [(ngModel)]="password" type="password" class="form-control"
+                    id="exampleInputPassword1" required pattern="[a-zA-Z0-9]*" #userpasswordinput="ngModel">
+            </div>
+            <div class="mb-3" *ngIf="userpasswordinput.invalid && userpasswordinput.touched">
+                <!-- invalid password -->
+                <p class="text-danger m-2">Invalid Password !</p>
+            </div>
+            <div class="text-end">
+                <button [disabled]="loginForm.invalid" type="submit"
+                    class="btn btn-primary fw-bold rounded-pill px-5">Login</button>
+            </div>
+        </form>
+    </div>
+</div>

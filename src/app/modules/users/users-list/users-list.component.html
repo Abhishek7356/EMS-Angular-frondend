@@ -1,0 +1,55 @@
+<div style="min-height: 90vh;" class="d-flex">
+    <div style="flex: 2; border-right: 1px solid rgb(153, 152, 152) ;" class="sidebar p-4 d-flex flex-column gap-4">
+        <a routerLink="/dashboard" class="fs-5 fw-bold" style="text-decoration: none;">Home</a>
+        <a routerLink="/users" class="fs-5 fw-bold" style="text-decoration: none;">Users</a>
+    </div>
+    <div style="flex: 10;" class="dashboard p-4 d-flex flex-column gap-4 align-items-start">
+        <h2 class=" pb-1" style="border-bottom: 5px solid rgba(52, 52, 174, 0.635);">All Users</h2>
+        <div class="text-end w-100">
+            <p>Current time : {{adminLoginTime | date:'medium'}}</p>
+            <button routerLink="add" class="btn btn-primary">Add</button>
+        </div>
+        <div class="d-flex gap-3 w-50 mx-auto mb-3">
+            <input [(ngModel)]="searchKey" type="text" class="form-control w-100 bg-light"
+                placeholder="Search User By Name ...">
+            <button class="btn border border-2 btn-light" mat-button [matMenuTriggerFor]="menu"
+                style="width:100px;">Sort</button>
+            <mat-menu #menu="matMenu">
+                <button (click)="sortUserById()" mat-menu-item>Sort By ID</button>
+                <button mat-menu-item (click)="sortUserByName()">Sort By Name</button>
+            </mat-menu>
+            <button (click)="generatePdf()" class="btn border border-2  btn-light fw-bold" style="width: 220px;">Export
+                as PDF</button>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let user of users | search:searchKey |  paginate: { itemsPerPage: 4, currentPage: p }">
+                <tr [hidden]="user.id == '1'">
+                    <th scope="row">{{user.id}}</th>
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td class="fw-bold" [ngClass]="user.active == '1' ? 'text-success' : 'text-primary'">{{user.active
+                        == "1" ? 'Active' :
+                        'InActive'}}</td>
+                    <td class="d-flex gap-2">
+                        <button routerLink="edit/{{user.id}}" class="btn btn-outline-success"><i
+                                class="fa-solid fa-pencil"></i></button>
+                        <button (click)="handleDelete(user.id)" class="btn btn-danger"><i
+                                class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center w-100">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </div>
+</div>

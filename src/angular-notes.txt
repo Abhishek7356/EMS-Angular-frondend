@@ -1,0 +1,26 @@
+
+1) Lazy Loading
+    Lazy-loading feature modules
+    By default, NgModules are eagerly loaded. This means that as soon as the application loads, 
+    so do all the NgModules, whether they are immediately necessary or not. For large applications 
+    with lots of routes, consider lazy loading —a design pattern that loads NgModules as needed. Lazy
+     loading helps keep initial bundle sizes smaller, which in turn helps decrease load times.
+
+     create a new module for lazy loading
+
+     src/app/users/ (cmd) - ng g m users --route users --module app.module
+     module/users cmd - ng g c add users (create the components you want)
+
+2) Pipes
+       -> Use pipes to transform strings, currency amounts, dates, and other data for display.
+       ->Pipes are simple functions to use in template expressions to accept an input value and return a transformed value. 
+    Built-in pipes
+        Angular provides built-in pipes for typical data transformations, including transformations for internationalization (i18n), which use locale information to format data.
+        eg:
+        DatePipe: Formats a date value according to locale rules.
+        UpperCasePipe: Transforms text to all upper case.
+        LowerCasePipe: Transforms text to all lower case.
+        CurrencyPipe: Transforms a number to a currency string, formatted according to locale rules.
+
+    User Defined pipes
+        ng g p pipes/search

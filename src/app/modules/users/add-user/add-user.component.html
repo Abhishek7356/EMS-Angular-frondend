@@ -1,0 +1,49 @@
+<div style="min-height: 90vh;" class="d-flex">
+    <div style="flex: 2; border-right: 1px solid rgb(153, 152, 152) ;" class="sidebar p-4 d-flex flex-column gap-4">
+        <a routerLink="/dashboard" class="fs-5 fw-bold" style="text-decoration: none;">Home</a>
+        <a routerLink="/users" class="fs-5 fw-bold" style="text-decoration: none;">Users</a>
+    </div>
+    <div style="flex: 10;" class="dashboard p-4 d-flex flex-column gap-4 align-items-start">
+        <h2 class=" py-2 px-5 " style="border-left: 5px solid rgba(52, 52, 174, 0.635);border-right: 5px solid rgba(52, 52, 174, 0.635); border-radius:50px 0;">Add New User</h2>
+        <form class="p-5 w-50 d-block mx-auto" #addUserForm="ngForm" (ngSubmit)="handleAddUSer()">
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">User ID</label>
+                <input #useridinput="ngModel" name="id" [(ngModel)]="user.id" type="number" class="form-control"
+                    required pattern="[0-9]*">
+            </div>
+            <div class="mb-3" *ngIf="useridinput.invalid && useridinput.touched">
+                <!-- invalid name -->
+                <p class="text-danger m-2">Invalid user Name !</p>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">User Name</label>
+                <input #usernameinput="ngModel" name="name" [(ngModel)]="user.name" type="text" class="form-control"
+                    required pattern="[a-zA-Z ]*">
+            </div>
+            <div class="mb-3" *ngIf="usernameinput.invalid && usernameinput.touched">
+                <!-- invalid name -->
+                <p class="text-danger m-2">Invalid user Name !</p>
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input name="email" [(ngModel)]="user.email" #useremailinput="ngModel" type="email" class="form-control"
+                    email required>
+            </div>
+            <div class="mb-3" *ngIf="useremailinput.invalid && useremailinput.touched">
+                <!-- invalid email -->
+                <p class="text-danger m-2">Invalid Email Address !</p>
+            </div>
+            <select name="active" [(ngModel)]="user.active" #active="ngModel" required class="form-select mt-4"
+                aria-label="Default select example">
+                <option value="" hidden>select</option>
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+            </select>
+            <div class="" *ngIf="active.invalid && active.touched">
+                <!-- invalid email -->
+                <p class="text-danger m-2 fs-1">*</p>
+            </div>
+            <button [disabled]="addUserForm.invalid" type="submit" class="btn btn-primary mt-3">Save</button>
+        </form>
+    </div>
+</div>

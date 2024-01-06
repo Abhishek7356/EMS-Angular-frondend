@@ -1,0 +1,50 @@
+<div style="min-height: 90vh;" class="d-flex">
+    <div *ngIf="showSideBar" style="flex: 2; " class="sidebar p-4 shadow d-flex flex-column gap-3">
+        <a routerLink="/dashboard" class="fs-5 fw-bold" style="text-decoration: none;">Home</a>
+        <a routerLink="/users" class="fs-5 fw-bold" style="text-decoration: none;">Users</a>
+    </div>
+    <div style="flex: 10;">
+        <div class="d-flex gap-2">
+            <div style="flex: 8;" class="d-flex flex-column gap-2">
+                <div class="p-3 mt-2 ms-2 me-2"
+                    style="background-image: url('https://actsupport.com/wp-content/uploads/2019/08/data-admin-banner.jpg'); width: 100%; height: 250px;background-size: cover;">
+                    <h1 class="text-light fs-5 d-flex align-items-center gap-2 fw-bold"><i
+                            class="fa-solid fa-bars fs-6 d-flex justify-content-center align-items-center bg-light text-dark rounded-circle"
+                            style="height: 40px; width: 40px; cursor: pointer;" (click)="showHide()"></i> Welcome {{adminName}}
+                    </h1>
+                </div>
+                <div class="d-flex gap-3 p-2">
+                    <div style="flex: 1;" class="shadow">
+                        <!-- Calender -->
+                        <mat-card class="demo-inline-calendar-card">
+                            <mat-calendar [(selected)]="selected"></mat-calendar>
+                        </mat-card>
+                        <!-- <p>Selected date: {{selected}}</p> -->
+                    </div>
+                    <div style="flex: 1;" class="">
+                        <!-- Pie chart -->
+                        <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions"
+                            style="width: 100%; height: 400px; display: block;"></highcharts-chart>
+                    </div>
+                </div>
+            </div>
+            <div style="flex: 4;" class="d-flex flex-column shadow gap-2">
+                <div class="d-flex flex-column gap-4 align-items-center bg-light py-2">
+                    <h1 class="fw-bold text-dark">Admin Details</h1>
+                    <img class="shadow-sm" style="width: 200px; height: 200px; border-radius: 50%;"
+                        src="https://th.bing.com/th/id/R.b3c989b6b25c7ef417cca7381eeada1b?rik=rPc21ZToyuhCEQ&riu=http%3a%2f%2fwww.startalkradio.net%2fwp-content%2fuploads%2f2015%2f03%2felon-musk-600x600-300x300.jpg&ehk=ETl5GokhkP4QpJCMNAsLyMbl2VYd%2fZ6uB3dR3BexcPk%3d&risl=&pid=ImgRaw&r=0"
+                        alt="">
+                    <input type="text" [(ngModel)]="adminName" placeholder="..." class="form-control w-75">
+                    <input type="text" [(ngModel)]="adminPassword" placeholder="..." class="form-control w-75">
+                    <div class="w-75 d-flex justify-content-end">
+                        <button (click)="updateAdminHandle()" class="btn btn-primary">Update</button>
+                    </div>
+                </div>
+                <div style="flex: 1;" class="d-flex flex-column gap-3 justify-content-center align-items-center">
+                    <h1 class="fw-bold">Total Number Of Employees</h1>
+                    <h1 class="fs-2 fw-bold">{{users.length}}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
